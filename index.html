@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/1aa21f1866.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>JavaScript</title>
+  </head>
+  <body>
+    <div class="container">
+      <!--       <h1>Adding & removing Styles & Classes</h1>
+ -->
+      <p class="card">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+        fugit nam, maxime architecto provident deleniti inventore explicabo.
+        Reprehenderit quae veniam facere deserunt sit necessitatibus, suscipit
+        recusandae repudiandae laborum neque rerum!
+      </p>
+      <ul class="item-list items">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+      <button>Run</button>
+    </div>
+    <div class="container">
+      <header>
+        <!-- <img src="images/note.png" alt="" /> -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-brand-shopee"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="#6f32be"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M4 7l.867 12.143a2 2 0 0 0 2 1.857h10.276a2 2 0 0 0 2 -1.857l.867 -12.143h-16z"
+          />
+          <path d="M8.5 7c0 -1.653 1.5 -4 3.5 -4s3.5 2.347 3.5 4" />
+          <path
+            d="M9.5 17c.413 .462 1 1 2.5 1s2.5 -.897 2.5 -2s-1 -1.5 -2.5 -2s-2 -1.47 -2 -2c0 -1.104 1 -2 2 -2s1.5 0 2.5 1"
+          />
+        </svg>
+        <h1 id="app-title">Shopping List</h1>
+      </header>
+      <form id="item-form">
+        <div class="form-control">
+          <input
+            type="text"
+            name="item"
+            id="item-input"
+            class="form-input"
+            aria-placeholder="Enter Item"
+          />
+          <select name="priority" class="form-input" id="priority-input">
+            <option value="0">Select Priority</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <input type="checkbox" id="checkbox" />Recurring Item
+          <input
+            type="text"
+            class="form-input"
+            id="item-input"
+            name="item"
+            placeholder="Enter Item"
+          />
+        </div>
+        <div class="form-control">
+          <button type="submit" class="btn">
+            <i class="fa-solid fa-plus"></i> Add Item
+          </button>
+        </div>
+      </form>
+
+      <div class="filter">
+        <input
+          type="text"
+          class="form-input-filter"
+          id="filter"
+          placeholder="Filter Items"
+        />
+      </div>
+
+      <ul id="item-list" class="items">
+        <li class="item">
+          Apples
+          <button class="remove-item btn-link text-red">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </li>
+        <li class="item">
+          Orange Juice
+          <button class="remove-item btn-link text-red">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </li>
+        <li class="item">
+          Oreos
+          <button class="remove-item btn-link text-red">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </li>
+        <li class="item">
+          Milk
+          <button class="remove-item btn-link text-red">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </li>
+      </ul>
+
+      <button id="clear" class="btn-clear">Clear All</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
