@@ -2,8 +2,19 @@ const itemForm = document.getElementById('item-form')
 const itemInput = document.getElementById('item-input')
 const itemList = document.getElementById('item-list')
 const clearBtn = document.getElementById('clear')
+const itemFilter = document.getElementById('filter')
 
-function addItem(e){
+function displayItems(){
+  const itemsFromStorage = getItemsFromStorage();
+  itemsFromStorage.forEach(item => {
+    onAddItemtoDOM(item);
+    checkUi();
+  })
+}
+
+
+
+function onAddItemSubmit(e){
   e.preventDefault();
   const newItem = itemInput.value;
   // Validate input
@@ -11,17 +22,28 @@ function addItem(e){
     alert('Add an item');
     return
   }
+  // Create item DOM element
+  onAddItemtoDOM(newItem);
+  // Add item to local storage
+  addItemtoStorage(newItem);
+  checkUi();
+
+
+  itemInput.value = ''
+}
+
+function onAddItemtoDOM(item){
   // Create new list item
   const li = document.createElement('li');
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(item));
 
   const button = createButton('remove-item btn-link text-red');
   li.appendChild(button);
 
+  // Add li to the DOM
   itemList.appendChild(li);
-
-  itemInput.value = ''
 }
+
 
 function createButton(classes){
   const button = document.createElement('button');
@@ -37,9 +59,33 @@ function createIcon(classes){
   return icon;
 }
 
+function addItemtoStorage(item){
+  const itemsFromStorage = getItemsFromStorage();
+
+  itemsFromStorage.push(item);
+// Convert array to string
+  localStorage.setItem('items', JSON.stringify(itemsFromStorage))
+}
+
+function getItemsFromStorage(){
+  let itemsFromStorage;
+  if(localStorage.getItem('items') === null){
+    itemsFromStorage = [];
+  }else{
+    itemsFromStorage = JSON.parse(localStorage.getItem('items'))
+  }
+
+  return itemsFromStorage;
+}
+
 function removeItem(e){
   if(e.target.parentElement.classList.contains('remove-item')){
-   e.target.parentElement.parentElement.remove()
+    if(confirm('Are you sure?')){
+      e.target.parentElement.parentElement.remove()
+
+      checkUi()
+
+    }
   }
 
 
@@ -49,9 +95,51 @@ function clearItems(e){
   while(itemList.firstChild){
    itemList.removeChild(itemList.firstChild)
   }
+
+  checkUi()
 }
 
-// Event Listeners
-itemForm.addEventListener('submit', addItem);
-itemList.addEventListener('click', removeItem);
-clearBtn.addEventListener('click', clearItems);
+function filterItems(e){
+  const items = document.querySelectorAll('li')
+  const text = e.target.value.toLowerCase();
+
+  items.forEach(item => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+
+
+    if(itemName.indexOf(text) != -1){
+      item.style.display = 'flex'
+
+    }else{
+      item.style.display = 'none'
+    }
+  })
+}
+
+function checkUi(){
+ const items = document.querySelectorAll('li')
+ if(items.length === 0){
+  clearBtn.style.display = 'none'
+  itemFilter.style.display = 'none'
+ }else{
+  clearBtn.style.display = 'block'
+  itemFilter.style.display = 'block'
+ }
+}
+
+// Initialize app
+
+function init (){
+
+  // Event Listeners
+  itemForm.addEventListener('submit', onAddItemSubmit);
+  itemList.addEventListener('click', removeItem);
+  clearBtn.addEventListener('click', clearItems);
+  itemFilter.addEventListener('input', filterItems);
+  document.addEventListener('DOMContentLoaded', displayItems())
+
+  checkUi();
+}
+
+init();
+
